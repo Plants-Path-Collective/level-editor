@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Level Editor</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="app">
+<aside>
+  <div class="brand">Level <span>Editor</span></div>
+  <div class="scroll">
+    <section>
+      <div class="sh"><h3>Levels</h3><div class="row" style="gap:0"><button class="ib" id="addLv" title="New level">+</button><button class="ib" id="dupLv" title="Duplicate">⧉</button><button class="ib" id="delLv" title="Delete">✕</button></div></div>
+      <div id="levels"></div>
+    </section>
+    <section><h3>Current level</h3>
+      <input type="text" id="name" placeholder="Name (e.g. Combat)">
+      <input type="text" id="note" placeholder="Note (e.g. bridge over void)">
+    </section>
+    <section><h3>Modules · 13×13 tiles</h3>
+      <div class="stepper"><span>Width</span><div><button id="wm">−</button><b id="wv"></b><button id="wp">+</button></div></div>
+      <div class="stepper"><span>Height</span><div><button id="hm">−</button><b id="hv"></b><button id="hp">+</button></div></div>
+      <div class="mods" id="mods"></div>
+      <div class="hint">Click a module to enable or disable it (L-shaped rooms).</div>
+    </section>
+  </div>
+  <div class="foot">
+    <button class="primary" id="png">Export current level (PNG)</button>
+    <div class="row"><button id="saveJson">Save JSON</button><button id="loadJson">Load JSON</button></div>
+    <input type="file" id="file" accept=".json" hidden>
+  </div>
+</aside>
+<main id="stage">
+  <div class="toolbar">
+    <div id="tools"></div>
+    <div class="div"></div>
+    <button class="ib" id="undo" title="Undo (Ctrl+Z)">↶</button>
+    <button class="ib" id="redo" title="Redo (Ctrl+Shift+Z)">↷</button>
+    <button class="ib" id="clear" title="Clear level">⌫</button>
+  </div>
+  <div class="canvaswrap"><canvas id="cv"></canvas></div>
+  <div class="chip" id="info"></div>
+  <div class="legend" id="legend"></div>
+</main>
+</div>
+<script src="script.js"></script>
+</body>
+</html>

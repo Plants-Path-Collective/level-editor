@@ -1,0 +1,520 @@
+:root {
+  box-sizing: border-box;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+
+  --bg: #eceae5;
+  --dot: #cfccc4;
+  --panel: #fff;
+  --ink: #242422;
+  --mute: #77756e;
+  --line: #e3e0d9;
+  --hover: #f2f0eb;
+  --acc: #d95f35;
+  --accsoft: #fbe4da;
+  --shadow: 0 4px 18px rgba(0, 0, 0, 0.12);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #171716;
+    --dot: #33332f;
+    --panel: #232321;
+    --ink: #ecebe6;
+    --mute: #9a9992;
+    --line: #34342f;
+    --hover: #2d2d2a;
+    --acc: #ee7a50;
+    --accsoft: #4a2c20;
+    --shadow: 0 4px 18px rgba(0, 0, 0, 0.5);
+  }
+}
+
+:root[data-theme="dark"] {
+  --bg: #171716;
+  --dot: #33332f;
+  --panel: #232321;
+  --ink: #ecebe6;
+  --mute: #9a9992;
+  --line: #34342f;
+  --hover: #2d2d2a;
+  --acc: #ee7a50;
+  --accsoft: #4a2c20;
+  --shadow: 0 4px 18px rgba(0, 0, 0, 0.5);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font: 13px/1.4 system-ui, -apple-system, "Segoe UI", sans-serif;
+  overflow: hidden;
+}
+
+button,
+input {
+  font: inherit;
+  color: var(--ink);
+}
+
+button {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 6px 10px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: var(--hover);
+}
+
+/* Main layout and sidebar */
+.app {
+  display: grid;
+  grid-template-columns: 272px 1fr;
+  height: 100%;
+}
+
+aside {
+  background: var(--panel);
+  border-right: 1px solid var(--line);
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.brand {
+  padding: 14px 16px;
+  font-weight: 700;
+  font-size: 15px;
+  border-bottom: 1px solid var(--line);
+}
+
+.brand span {
+  color: var(--acc);
+}
+
+.scroll {
+  flex: 1;
+  overflow: auto;
+  min-height: 0;
+}
+
+section {
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--line);
+}
+
+.sh {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+h3 {
+  margin: 0 0 8px;
+  font-size: 11px;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--mute);
+  font-weight: 600;
+}
+
+.sh h3 {
+  margin: 0;
+}
+
+.row {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.ib {
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  display: grid;
+  place-items: center;
+  border-color: transparent;
+  background: transparent;
+  font-size: 15px;
+}
+
+.ib:hover {
+  background: var(--hover);
+}
+
+.lv {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  padding: 6px 8px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.lv:hover {
+  background: var(--hover);
+}
+
+.lv.on {
+  background: var(--accsoft);
+}
+
+.lv b {
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+  background: var(--acc);
+  color: #fff;
+  display: grid;
+  place-items: center;
+  font-size: 12px;
+}
+
+.lv span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+input[type="text"] {
+  width: 100%;
+  background: var(--bg);
+  border: 1px solid transparent;
+  border-radius: 8px;
+  padding: 7px 9px;
+  margin-bottom: 6px;
+}
+
+input[type="text"]:focus {
+  outline: none;
+  border-color: var(--acc);
+}
+
+.stepper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+
+.stepper div {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.stepper button {
+  width: 26px;
+  height: 26px;
+  padding: 0;
+}
+
+.mods {
+  display: grid;
+  gap: 4px;
+  margin-top: 10px;
+  justify-content: start;
+}
+
+.mod {
+  width: 36px;
+  height: 36px;
+  border-radius: 6px;
+  border: 1px dashed var(--mute);
+  cursor: pointer;
+  opacity: 0.6;
+}
+
+.mod.on {
+  background: #f1eee7;
+  border: 2px solid #2a2a28;
+  opacity: 1;
+}
+
+.hint {
+  font-size: 12px;
+  color: var(--mute);
+  margin-top: 8px;
+}
+
+.foot {
+  padding: 14px 16px;
+  border-top: 1px solid var(--line);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.foot .row button {
+  flex: 1;
+  font-size: 12px;
+}
+
+.primary {
+  background: var(--acc);
+  border-color: var(--acc);
+  color: #fff;
+  font-weight: 600;
+  padding: 9px;
+}
+
+.primary:hover {
+  background: var(--acc);
+  filter: brightness(1.08);
+}
+
+/* Canvas and drawing toolbar */
+main {
+  position: relative;
+  min-width: 0;
+  min-height: 0;
+  overflow: auto;
+  background-color: var(--bg);
+  background-image: radial-gradient(var(--dot) 1.2px, transparent 1.2px);
+  background-size: 22px 22px;
+  display: flex;
+}
+
+.toolbar {
+  position: fixed;
+  top: calc(14px + env(safe-area-inset-top, 0px));
+  left: calc(272px + (100% - 272px) / 2);
+  transform: translateX(-50%);
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 5px;
+  box-shadow: var(--shadow);
+  max-width: calc(100% - 300px);
+  overflow-x: auto;
+}
+
+#tools {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.tool {
+  position: relative;
+  width: 38px;
+  height: 38px;
+  padding: 0;
+  border-color: transparent;
+  background: transparent;
+  display: grid;
+  place-items: center;
+  border-radius: 9px;
+}
+
+.tool:hover {
+  background: var(--hover);
+}
+
+.tool.on {
+  background: var(--acc);
+}
+
+.tool.on .sw {
+  box-shadow: 0 0 0 2px #fff;
+}
+
+.tool i {
+  position: absolute;
+  right: 3px;
+  bottom: 1px;
+  font-size: 9px;
+  font-style: normal;
+  color: var(--mute);
+}
+
+.tool.on i {
+  color: #fff;
+}
+
+.sw {
+  width: 20px;
+  height: 20px;
+  border-radius: 5px;
+  border: 1px solid rgba(0, 0, 0, 0.35);
+  display: grid;
+  place-items: center;
+  font-size: 11px;
+  color: #fff;
+  line-height: 1;
+}
+
+.div {
+  width: 1px;
+  height: 24px;
+  background: var(--line);
+  margin: 0 4px;
+}
+
+.canvaswrap {
+  margin: auto;
+  padding: 80px 30px 70px;
+}
+
+canvas {
+  display: block;
+  touch-action: none;
+  cursor: crosshair;
+  filter: drop-shadow(0 6px 18px rgba(0, 0, 0, 0.18));
+}
+
+.chip {
+  position: fixed;
+  bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+  left: 288px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  padding: 6px 14px;
+  box-shadow: var(--shadow);
+  white-space: nowrap;
+  max-width: calc(100% - 272px - 260px);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  z-index: 5;
+}
+
+.tool svg {
+  width: 24px;
+  height: 24px;
+  display: block;
+}
+
+/* Legend panel */
+.legend {
+  position: fixed;
+  right: 16px;
+  bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+  width: 224px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  z-index: 5;
+  font-size: 12px;
+}
+
+.legend header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 8px 8px 12px;
+  font-weight: 600;
+}
+
+.legend header button {
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  font-size: 14px;
+  color: var(--mute);
+}
+
+.lgbody {
+  padding: 0 6px 8px;
+  max-height: 60vh;
+  overflow: auto;
+}
+
+.legend.min .lgbody,
+.legend.min .lgfoot {
+  display: none;
+}
+
+.lg {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 3px 6px;
+  border-radius: 6px;
+}
+
+.lg[data-t] {
+  cursor: pointer;
+}
+
+.lg[data-t]:hover {
+  background: var(--hover);
+}
+
+.lg.on {
+  background: var(--accsoft);
+}
+
+.lg svg {
+  width: 18px;
+  height: 18px;
+  flex: none;
+}
+
+.lgsep {
+  height: 1px;
+  background: var(--line);
+  margin: 5px 6px;
+}
+
+.lgfoot {
+  padding: 8px 12px;
+  border-top: 1px solid var(--line);
+  color: var(--mute);
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+/* Small screens */
+@media (max-width: 760px) {
+  html,
+  body {
+    overflow: auto;
+  }
+
+  .app {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 80vh;
+    height: auto;
+  }
+
+  aside {
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .toolbar {
+    left: 50%;
+    max-width: calc(100% - 20px);
+  }
+
+  .chip {
+    left: 12px;
+    max-width: calc(100% - 24px);
+    bottom: calc(60px + env(safe-area-inset-bottom, 0px));
+  }
+
+  .legend {
+    right: 12px;
+    width: 200px;
+  }
+}
